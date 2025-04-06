@@ -1,0 +1,35 @@
+[Unit]
+Description=Git Container
+Requires=git-db.service
+After=git-db.service
+
+
+[Container]
+ContainerName=git-forgejo
+Image=codeberg.org/forgejo/forgejo:10.0.3-rootless
+
+Pod=git.pod
+
+Volume=./git-data:/data
+Volume=/etc/timezone:/etc/timezone:ro
+Volume=/etc/localtime:/etc/localtime:ro
+
+Environment=USER_UID=1000
+Environment=USER_GID=1000
+
+Environment=FORGEJO__database__DB_TYPE=postgres
+# Environment=FORGEJO__database__HOST=db:5432
+
+Secret=GIT_POSTGRES_DB,type=env,target=FORGEJO__database__NAME
+Secret=GIT_POSTGRES_USER,type=env,target==FORGEJO__database__USER
+Secret=GIT_POSTGRES_PASSWORD,type=env,target==FORGEJO__database__PASSWD
+
+
+[Service]
+Restart=always
+# TimeoutStartSec=900
+
+
+[Install]
+WantedBy=default.target
+

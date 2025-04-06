@@ -1,0 +1,28 @@
+[Unit]
+Description=Git PostgresSQL Container
+After=network-online.target
+
+
+[Container]
+ContainerName=git-postgres
+Image=docker.io/library/postgres:17.4-alpine3.21
+Pod=git.pod
+
+AddCapability=SYS_NICE
+User=1000:1000
+
+Volume=./git-db-data:/var/lib/postgresql/data
+
+Secret=POSTGRES_USER,type=env,target=POSTGRES_USER
+Secret=POSTGRES_PASSWORD,type=env,target=POSTGRES_PASSWORD
+Secret=POSTGRES_DB,type=env,target=POSTGRES_DB
+
+
+[Service]
+# Restart=always
+
+
+[Install]
+WantedBy=multi-user.target default.target
+RequiredBy=git.service
+

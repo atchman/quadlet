@@ -1,0 +1,17 @@
+[Unit]
+Description=Git Pod
+
+
+[Pod]
+PodName=git-pod
+# Network=git-net
+# NetworkAlias=name
+# PublishPort=127.0.0.1:8080:80
+# PublishPort=127.0.0.1:3000:3000
+# PublishPort=222:22
+# AddHost=example.com:host-gateway
+# PublishPort=127.0.0.1:80:80
+
+# Volume=git-data
+# Volume=git-db-data
+
