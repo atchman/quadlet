@@ -10,7 +10,7 @@ Image=codeberg.org/forgejo/forgejo:10.0.3-rootless
 
 Pod=git.pod
 
-Volume=./git-data:/data
+Volume=git-data:/data
 Volume=/etc/timezone:/etc/timezone:ro
 Volume=/etc/localtime:/etc/localtime:ro
 

@@ -1,6 +1,7 @@
 [Unit]
 Description=Git PostgresSQL Container
-After=network-online.target
+After=podman-user-wait-network-online.service
+Wants=podman-user-wait-network-online.service
 
 
 [Container]
@@ -11,7 +12,7 @@ Pod=git.pod
 AddCapability=SYS_NICE
 User=1000:1000
 
-Volume=./git-db-data:/var/lib/postgresql/data
+Volume=git-db-data:/var/lib/postgresql/data
 
 Secret=POSTGRES_USER,type=env,target=POSTGRES_USER
 Secret=POSTGRES_PASSWORD,type=env,target=POSTGRES_PASSWORD
