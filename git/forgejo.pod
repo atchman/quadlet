@@ -1,0 +1,7 @@
+[Unit]
+Description=Forgejo Git Pod
+
+
+[Pod]
+PodName=forgejo-pod
+

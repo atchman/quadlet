@@ -1,0 +1,41 @@
+[Unit]
+Description=Forgejo Git Container
+Requires=forgejo-pg.service
+After=forgejo-pg.service
+
+
+[Container]
+ContainerName=forgejo
+Image=codeberg.org/forgejo/forgejo:10.0.3-rootless
+
+Pod=forgejo.pod
+
+Volume=forgejo-data:/data
+# Volume=%h/container/forgejo-data:/data:Z
+Volume=/etc/timezone:/etc/timezone:ro
+Volume=/etc/localtime:/etc/localtime:ro
+
+LogDriver=journald
+
+Environment=USER_UID=1000
+Environment=USER_GID=1000
+
+Environment=FORGEJO__database__DB_TYPE=postgres
+Environment=FORGEJO__database__NAME=postgres
+# Environment=FORGEJO__database__HOST=db:5432
+
+# EnvironmentFile=./%n/forgejo.env
+
+#Secret=forgejo-pg_db,type=env,target=FORGEJO__database__NAME
+Secret=forgejo-pg_user,type=env,target==FORGEJO__database__USER
+Secret=forgejo-pg_password,type=env,target==FORGEJO__database__PASSWD
+
+
+[Service]
+Restart=always
+# TimeoutStartSec=900
+
+
+[Install]
+WantedBy=default.target
+

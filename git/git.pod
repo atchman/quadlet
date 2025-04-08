@@ -1,7 +1,0 @@
-[Unit]
-Description=Git Pod
-
-
-[Pod]
-PodName=git-pod
-

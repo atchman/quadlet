@@ -1,18 +1,18 @@
 [Unit]
-Description=Git PostgresSQL Container
+Description=Forgejo PostgresSQL Container
 After=podman-user-wait-network-online.service
 Wants=podman-user-wait-network-online.service
 
 
 [Container]
-ContainerName=git-postgres
+ContainerName=forgejo-pg
 Image=docker.io/library/postgres:17.4-alpine3.21
-Pod=git.pod
+Pod=forgejo.pod
 
 AddCapability=SYS_NICE
 User=1000:1000
 
-Volume=git-db-data:/var/lib/postgresql/data
+Volume=forgejo-db-data:/var/lib/postgresql/data
 
 Secret=POSTGRES_USER,type=env,target=POSTGRES_USER
 Secret=POSTGRES_PASSWORD,type=env,target=POSTGRES_PASSWORD
@@ -25,5 +25,5 @@ Secret=POSTGRES_DB,type=env,target=POSTGRES_DB
 
 [Install]
 WantedBy=multi-user.target default.target
-RequiredBy=git.service
+RequiredBy=forgejo.service
 
