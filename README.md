@@ -9,6 +9,10 @@ podman, pod, quadlet
 
 - podman >= v.5.4.2
 
+## services
+
+- forgejo (git)
+
 ## doc
 
 - https://docs.podman.io/en/v5.4.2/markdown/podman-systemd.unit.5.html
